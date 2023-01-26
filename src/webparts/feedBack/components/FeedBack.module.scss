@@ -1,34 +1,31 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
-.feedBack {
-  overflow: hidden;
-  padding: 1em;
-  color: "[theme:bodyText, default: #323130]";
-  color: var(--bodyText);
-  &.teams {
-    font-family: $ms-font-family-fallbacks;
-  }
+.FeedBackBodySection {
+  background: #b3fbf2;
+  padding: 50px;
 }
 
-.welcome {
-  text-align: center;
+.Header {
+  color: #00584d;
+  font-weight: bold;
+  font-size: 26px;
 }
 
-.welcomeImage {
-  width: 100%;
-  max-width: 420px;
+.LabelSection {
+  color: #00584d;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.links {
-  a {
-    text-decoration: none;
-    color: "[theme:link, default:#03787c]";
-    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
-
-    &:hover {
-      text-decoration: underline;
-      color: "[theme:linkHovered, default: #014446]";
-      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
-    }
-  }
+.btnSection {
+  width: 66%;
+  height: 40px;
+  margin: 20px 0px;
+  border: none;
+  border-radius: 6px;
+  background: #edc32c;
+  color: #00584d;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
 }
