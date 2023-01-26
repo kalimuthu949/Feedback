@@ -1,0 +1,16 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "feedback-webpart",
+    "libraryId": "fd354019-79e0-4b2f-80cd-244fcd571c44",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "FeedbackWebpart",
+    "solutionShortDescription": "FeedbackWebpart description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
