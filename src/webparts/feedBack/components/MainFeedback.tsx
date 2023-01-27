@@ -79,7 +79,12 @@ const MainFeedback = (props: any) => {
       Title: "",
       Feedback: "",
     };
-    if (!masterFeedBack.Feedback) {
+    if (!masterFeedBack.Title) {
+      errValidation.Title = "Please enter your name";
+      setErrorFeedBack({ ...errValidation });
+      setIsSpinner(false);
+    } 
+    else if (!masterFeedBack.Feedback) {
       errValidation.Feedback = "Please enter your feedback";
       setErrorFeedBack({ ...errValidation });
       setIsSpinner(false);
@@ -101,7 +106,7 @@ const MainFeedback = (props: any) => {
           Feedback: "",
         });
         setIsSpinner(false);
-        setsuccessmsg("Your feedback submitted successfully.");
+        setsuccessmsg("Your feedback submitted successfully !!!");
         setTimeout(() => {
           setsuccessmsg("");
         }, 2000);
@@ -114,9 +119,10 @@ const MainFeedback = (props: any) => {
   // useEffect function section
   useEffect(() => {
     setIsLoader(false);
-    props.sp.web.currentUser.get().then((res) => {
-      masterFeedBack.Title = res.Title;
-      setMasterFeedBack({ ...masterFeedBack });
+    props.sp.web.currentUser.get().then((res) => 
+    {
+      //masterFeedBack.Title = res.Title;
+      //setMasterFeedBack({ ...masterFeedBack });
     });
   }, []);
   /* Function section end */
@@ -145,7 +151,7 @@ const MainFeedback = (props: any) => {
 
             {/* Feedback Text Field section start */}
             <div>
-              {/* <div style={{ marginTop: 12 }}>
+              <div style={{ marginTop: 12 }}>
                 <Label required className={styles.LabelSection}>
                   1. Your Name
                 </Label>
@@ -160,10 +166,10 @@ const MainFeedback = (props: any) => {
                     setMasterFeedBack({ ...masterFeedBack });
                   }}
                 />
-              </div> */}
+              </div>
               <div style={{ marginTop: 12 }}>
                 <Label required className={styles.LabelSection}>
-                  1. Description
+                  2. Description
                 </Label>
                 <TextField
                   styles={
