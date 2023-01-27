@@ -25,6 +25,7 @@ const MainFeedback = (props: any) => {
   /* State-decluration section start */
   const [masterFeedBack, setMasterFeedBack] = useState<IFeedBack>(feedBackObj);
   const [errorFeedBack, setErrorFeedBack] = useState<IFeedBack>(errFeedback);
+  const [successmsg, setsuccessmsg] = useState("");
   const [isLoader, setIsLoader] = useState<boolean>(false);
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
   /* State-decluration section end */
@@ -100,6 +101,10 @@ const MainFeedback = (props: any) => {
           Feedback: "",
         });
         setIsSpinner(false);
+        setsuccessmsg("Your feedback submitted successfully.");
+        setTimeout(() => {
+          setsuccessmsg("");
+        }, 2000);
       })
       .catch((error: any) => {
         getErrorFunction(error);
@@ -183,6 +188,9 @@ const MainFeedback = (props: any) => {
               <div style={{ color: "red", fontWeight: "600" }}>
                 {errorFeedBack.Title ? `* ${errorFeedBack.Title}` : ""}
                 {errorFeedBack.Feedback ? `* ${errorFeedBack.Feedback}` : ""}
+              </div>
+              <div style={{ color: "Green", fontWeight: "600" }}>
+                {successmsg}
               </div>
               <div className={styles.btnContainer}>
                 <button
