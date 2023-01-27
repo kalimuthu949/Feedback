@@ -78,11 +78,7 @@ const MainFeedback = (props: any) => {
       Title: "",
       Feedback: "",
     };
-    if (!masterFeedBack.Title) {
-      errValidation.Title = "Please enter your name";
-      setErrorFeedBack({ ...errValidation });
-      setIsSpinner(false);
-    } else if (!masterFeedBack.Feedback) {
+    if (!masterFeedBack.Feedback) {
       errValidation.Feedback = "Please enter your feedback";
       setErrorFeedBack({ ...errValidation });
       setIsSpinner(false);
@@ -95,7 +91,8 @@ const MainFeedback = (props: any) => {
   // get record add function section
   const addRecord = async () => {
     await props.sp.web.lists
-      .getByTitle("Feedback")
+      .getByTitle("Host Hub Feedback")
+      // .getByTitle("Feedback")
       .items.add(masterFeedBack)
       .then((response: any) => {
         setMasterFeedBack({
@@ -112,6 +109,10 @@ const MainFeedback = (props: any) => {
   // useEffect function section
   useEffect(() => {
     setIsLoader(false);
+    props.sp.web.currentUser.get().then((res) => {
+      masterFeedBack.Title = res.Title;
+      setMasterFeedBack({ ...masterFeedBack });
+    });
   }, []);
   /* Function section end */
 
@@ -139,9 +140,9 @@ const MainFeedback = (props: any) => {
 
             {/* Feedback Text Field section start */}
             <div>
-              <div>
+              {/* <div style={{ marginTop: 12 }}>
                 <Label required className={styles.LabelSection}>
-                  1.Your Name
+                  1. Your Name
                 </Label>
                 <TextField
                   styles={
@@ -154,10 +155,10 @@ const MainFeedback = (props: any) => {
                     setMasterFeedBack({ ...masterFeedBack });
                   }}
                 />
-              </div>
-              <div>
+              </div> */}
+              <div style={{ marginTop: 12 }}>
                 <Label required className={styles.LabelSection}>
-                  2.Feedback
+                  1. Description
                 </Label>
                 <TextField
                   styles={
@@ -183,13 +184,15 @@ const MainFeedback = (props: any) => {
                 {errorFeedBack.Title ? `* ${errorFeedBack.Title}` : ""}
                 {errorFeedBack.Feedback ? `* ${errorFeedBack.Feedback}` : ""}
               </div>
-              <button
-                disabled={isSpinner}
-                className={styles.btnSection}
-                onClick={() => (setIsSpinner(true), getvalidation())}
-              >
-                {isSpinner ? <Spinner /> : "SUBMIT"}
-              </button>
+              <div className={styles.btnContainer}>
+                <button
+                  disabled={isSpinner}
+                  className={styles.btnSection}
+                  onClick={() => (setIsSpinner(true), getvalidation())}
+                >
+                  {isSpinner ? <Spinner /> : "Submit"}
+                </button>
+              </div>
             </div>
             {/* BTN section end */}
           </div>
