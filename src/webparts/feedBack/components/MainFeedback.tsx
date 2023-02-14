@@ -25,6 +25,7 @@ const MainFeedback = (props: any) => {
   /* State-decluration section start */
   const [masterFeedBack, setMasterFeedBack] = useState<IFeedBack>(feedBackObj);
   const [errorFeedBack, setErrorFeedBack] = useState<IFeedBack>(errFeedback);
+  const [errorAdmin,seterrorAdmin] = useState<string>("");
   const [successmsg, setsuccessmsg] = useState("");
   const [isLoader, setIsLoader] = useState<boolean>(false);
   const [isSpinner, setIsSpinner] = useState<boolean>(false);
@@ -70,8 +71,13 @@ const MainFeedback = (props: any) => {
 
   /* Function section start */
   // get error function section
-  const getErrorFunction = (error: any) => {
-    console.log(error);
+  const getErrorFunction = (error: any) => 
+  {
+    setIsSpinner(false);
+    seterrorAdmin("Something went wrong. Please contact system admin");  
+    setTimeout(() => {
+      seterrorAdmin("");
+    }, 2000);
   };
   // validation function section
   const getvalidation = () => {
@@ -96,6 +102,7 @@ const MainFeedback = (props: any) => {
 
   // get record add function section
   const addRecord = async () => {
+    seterrorAdmin("");
     await props.sp.web.lists
       .getByTitle("Host Hub Feedback")
       // .getByTitle("Feedback")
@@ -123,7 +130,10 @@ const MainFeedback = (props: any) => {
     {
       //masterFeedBack.Title = res.Title;
       //setMasterFeedBack({ ...masterFeedBack });
-    });
+    }).catch(function(error)
+    {
+      getErrorFunction(error);
+    })
   }, []);
   /* Function section end */
 
@@ -194,6 +204,7 @@ const MainFeedback = (props: any) => {
               <div style={{ color: "red", fontWeight: "600" }}>
                 {errorFeedBack.Title ? `* ${errorFeedBack.Title}` : ""}
                 {errorFeedBack.Feedback ? `* ${errorFeedBack.Feedback}` : ""}
+                {!errorFeedBack.Title && !errorFeedBack.Feedback && errorAdmin?errorAdmin:""}
               </div>
               <div style={{ color: "Green", fontWeight: "600" }}>
                 {successmsg}
