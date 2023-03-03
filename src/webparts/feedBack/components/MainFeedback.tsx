@@ -113,7 +113,7 @@ const MainFeedback = (props: any) => {
           Feedback: "",
         });
         setIsSpinner(false);
-        setsuccessmsg("Your feedback submitted successfully !!!");
+        setsuccessmsg("Your feedback was submitted successfully");
         setTimeout(() => {
           setsuccessmsg("");
         }, 2000);
